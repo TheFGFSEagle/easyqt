@@ -20,11 +20,7 @@ target_include_directories(
 	easyqt
 	PUBLIC
 		${PROJECT_SOURCE_DIR}/include/easyqt/
-		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>"
-		singleton++
-		Qt5::Widgets
-		Qt5::UiTools
-		pugixml::pugixml
+		"$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/>"
 )
 set_target_properties(easyqt PROPERTIES
 	VERSION ${PROJECT_VERSION}
