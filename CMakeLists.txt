@@ -37,7 +37,7 @@ install(
 	DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig
 )
 install(
-	DIRECTORY include/
+	DIRECTORY include/easyqt/
 	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/easyqt
 )
 

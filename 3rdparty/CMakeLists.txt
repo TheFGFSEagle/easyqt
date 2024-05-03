@@ -1,2 +1,6 @@
-add_subdirectory(pugixml)
-add_subdirectory(singletonpp)
+if (NOT TARGET pugixml)
+	add_subdirectory(pugixml)
+endif()
+if (NOT TARGET singletonpp)
+	add_subdirectory(singletonpp)
+endif()
