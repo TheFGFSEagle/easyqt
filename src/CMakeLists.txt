@@ -18,7 +18,7 @@ target_link_libraries(
 target_include_directories(
 	easyqt
 	PUBLIC
-		${PROJECT_SOURCE_DIR}/include/
+		${PROJECT_SOURCE_DIR}/include/easyqt/
 		singleton++
 		Qt5::Widgets
 		Qt5::UiTools
