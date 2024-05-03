@@ -1,0 +1,39 @@
+add_library(easyqt INTERFACE
+	application.cxx
+	command.cxx
+	commands.cxx
+	logging.cxx
+	menubar.cxx
+	uiloader.cxx
+	utils.cxx
+)
+target_link_libraries(
+	easyqt INTERFACE
+	Qt5::Widgets
+	Qt5::UiTools
+	pugixml::pugixml
+	singleton++
+)
+
+target_include_directories(
+	easyqt
+	INTERFACE
+		${PROJECT_SOURCE_DIR}/include/
+		singleton++
+		Qt5::Widgets
+		Qt5::UiTools
+		pugixml::pugixml
+)
+set_target_properties(easyqt PROPERTIES
+	VERSION ${PROJECT_VERSION}
+	SOVERSION 1
+)
+
+install(
+	TARGETS easyqt
+	ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/easyqt)
+
