@@ -7,7 +7,7 @@ add_library(easyqt
 	uiloader.cxx
 	utils.cxx
 )
-add_library(easyqt ALIAS easyqt::easyqt)
+add_library(easyqt::easyqt ALIAS easyqt)
 target_link_libraries(
 	easyqt
 	Qt5::Widgets
