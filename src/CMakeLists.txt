@@ -1,4 +1,4 @@
-add_library(easyqt INTERFACE
+add_library(easyqt
 	application.cxx
 	command.cxx
 	commands.cxx
@@ -8,7 +8,7 @@ add_library(easyqt INTERFACE
 	utils.cxx
 )
 target_link_libraries(
-	easyqt INTERFACE
+	easyqt
 	Qt5::Widgets
 	Qt5::UiTools
 	pugixml::pugixml
@@ -17,7 +17,7 @@ target_link_libraries(
 
 target_include_directories(
 	easyqt
-	INTERFACE
+	PUBLIC
 		${PROJECT_SOURCE_DIR}/include/
 		singleton++
 		Qt5::Widgets
