@@ -10,16 +10,14 @@ namespace easyqt {
 		Q_OBJECT
 		public:
 			Command() {};
-			virtual ~Command() {};
 			virtual void execute() {};
-			virtual const std::string name();
+			virtual const std::string name() { return ""; };
 	};
 }
 
 #define EASYQTCOMMAND_GEN_DEF(classname) \
 class classname: public Singleton<classname, easyqt::Command> { \
 	public: \
-		classname(); \
 		void execute() override; \
 		const std::string name() override; \
 };

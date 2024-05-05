@@ -10,6 +10,7 @@
 
 namespace easyqt {
 	class UiLoader: public QUiLoader {
+		Q_OBJECT
 		public:
 			QWidget* createWidget(const QString &widgetName, QWidget* parentWidget, const QString &name);
 	};

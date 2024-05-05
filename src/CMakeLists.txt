@@ -1,6 +1,6 @@
 add_library(easyqt
+	${EASYQT_MOC_HEADERS}
 	application.cxx
-	command.cxx
 	commands.cxx
 	logging.cxx
 	menubar.cxx
@@ -10,6 +10,7 @@ add_library(easyqt
 add_library(easyqt::easyqt ALIAS easyqt)
 target_link_libraries(
 	easyqt
+	PUBLIC
 	Qt5::Widgets
 	Qt5::UiTools
 	pugixml::pugixml

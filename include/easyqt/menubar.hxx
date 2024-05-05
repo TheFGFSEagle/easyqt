@@ -5,12 +5,13 @@
 
 #include <QMenuBar>
 #include "singleton.hxx"
+#include "commands.hxx"
 
 namespace easyqt {
 	class MenuBar: public Singleton<MenuBar, QMenuBar> {
 		Q_OBJECT
 		public:
-			MenuBar();
+			MenuBar() {};
 			void loadFromFile(std::string file);
 			inline static const std::string name {"menubar"};
 	};
