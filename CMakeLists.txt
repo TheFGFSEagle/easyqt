@@ -16,11 +16,15 @@ set(BUILD_SHARED_LIBS ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+option(ENABLE_TESTING "Whether to build tests" ON)
+
 find_package(Qt5 COMPONENTS Widgets UiTools REQUIRED)
 add_subdirectory(3rdparty)
 add_subdirectory(include)
 add_subdirectory(src)
-add_subdirectory(tests)
+if(ENABLE_TESTING)
+	add_subdirectory(tests)
+endif()
 
 CONFIGURE_FILE(
 	"${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/cmake_uninstall.cmake.in"
