@@ -11,9 +11,8 @@ namespace easyqt {
 	class MenuBar: public Singleton<MenuBar, QMenuBar> {
 		Q_OBJECT
 		public:
-			MenuBar() {};
+			MenuBar(std::string name = "") {};
 			void loadFromFile(std::string file);
-			inline static const std::string name {"menubar"};
 	};
 }
 #endif
