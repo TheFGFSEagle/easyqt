@@ -54,9 +54,9 @@ namespace easyqt {
 		private:
 			LogLevel _level {LogLevel::WARNING};
 	};
+	std::ostream& operator<<(std::ostream& s, const easyqt::Logger::LogLevel level);
 }
 
-std::ostream& operator<<(std::ostream& s, const easyqt::Logger::LogLevel level);
 
 std::string string(easyqt::Logger::LogLevel level);
 

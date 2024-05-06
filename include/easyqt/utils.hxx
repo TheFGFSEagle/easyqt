@@ -6,9 +6,11 @@
 
 #include <QDir>
 
-std::string getResourcePath(std::string path);
-std::string strftime(std::time_t time, const std::string& format);
-std::string strftime(std::time_t time, const char* format);
+namespace easyqt {
+	std::string getResourcePath(std::string path);
+	std::string strftime(std::time_t time, const std::string& format);
+	std::string strftime(std::time_t time, const char* format);
+}
 
 template<typename T>
 std::string& string(T& string);
