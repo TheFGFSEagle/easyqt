@@ -17,12 +17,12 @@ std::string string(easyqt::Logger::LogLevel level) {
 	}
 }
 
-std::ostream& operator<<(std::ostream& s, easyqt::Logger::LogLevel level) {
-	s << string(level);
-	return s;
-}
-
 namespace easyqt {
+	std::ostream& operator<<(std::ostream& s, easyqt::Logger::LogLevel level) {
+		s << string(level);
+		return s;
+	}
+	
 	const Logger::LogLevel Logger::getLogLevelForString(std::string levelName) {
 		std::string upper = toUpper(levelName);
 		if (upper == "DEBUG") {
