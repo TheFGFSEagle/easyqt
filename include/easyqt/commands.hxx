@@ -4,7 +4,7 @@
 #include "command.hxx"
 
 namespace easyqt {
-	Command* getCommand(std::string name);
+	std::shared_ptr<Command> getCommand(std::string name);
 
 	EASYQTCOMMAND_GEN_DEF(CommandQuit)
 }

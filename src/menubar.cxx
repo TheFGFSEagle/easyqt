@@ -20,12 +20,12 @@ namespace easyqt {
 			std::cout << "Warning: no such theme icon '" << iconName << "' in theme " << QIcon::themeName().toStdString() << " !" << std::endl;
 		}
 		item->setShortcut(QKeySequence(itemNode.child_value("shortcut")));
-		Command* cmd = getCommand(itemNode.child_value("command"));
+		std::shared_ptr<Command> cmd = getCommand(itemNode.child_value("command"));
 		if (cmd) {
 			QObject::connect(
 				item,
 				&QAction::triggered,
-				getCommand(itemNode.child_value("command")),
+				cmd.get(),
 				&Command::execute
 			);
 		} else {

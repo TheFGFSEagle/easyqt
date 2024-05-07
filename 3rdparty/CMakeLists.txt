@@ -1,6 +1,8 @@
+set(ENABLE_TESTING OFF)
 if (NOT TARGET pugixml)
 	add_subdirectory(pugixml)
 endif()
 if (NOT TARGET singletonpp)
 	add_subdirectory(singletonpp)
 endif()
+unset(ENABLE_TESTING)
