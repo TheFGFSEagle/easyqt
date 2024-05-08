@@ -38,7 +38,7 @@ ADD_CUSTOM_TARGET(
 
 configure_file(easyqt.pc.in easyqt.pc @ONLY)
 install(
-	FILES ${CMAKE_BINARY_DIR}/easyqt.pc
+	FILES ${CMAKE_CURRENT_BINARY_DIR}/easyqt.pc
 	DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig
 )
 install(
