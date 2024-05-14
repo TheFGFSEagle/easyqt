@@ -7,7 +7,7 @@ namespace easyqt {
 	QWidget* UiLoader::createWidget(const QString& widgetName, QWidget* parentWidget, const QString& name) {
 		QWidget* w;
 		if (widgetName == "easyqt::MenuBar") {
-			w = MenuBar::instance(name.toStdString()).get();
+			w = MenuBar::instance(name.toStdString());
 		} else {
 			return QUiLoader::createWidget(widgetName, parentWidget, name);
 		}

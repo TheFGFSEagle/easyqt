@@ -10,8 +10,8 @@ namespace easyqt {
 		Q_OBJECT
 		public:
 			Application(int& argc, char **argv);
-			static std::shared_ptr<Application> instance() {
-				return std::shared_ptr<Application>(qobject_cast<Application*>(QApplication::instance()));
+			static Application* instance() {
+				return qobject_cast<Application*>(QApplication::instance());
 			}
 	};
 }
