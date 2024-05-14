@@ -16,7 +16,7 @@ namespace easyqt {
 }
 
 #define EASYQTCOMMAND_GEN_DEF(classname) \
-class classname: public Singleton<classname, easyqt::Command> { \
+class classname: public SmartPtrSingleton<classname, easyqt::Command> { \
 	public: \
 		void execute() override; \
 		const std::string name() override; \
