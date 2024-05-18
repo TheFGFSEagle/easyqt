@@ -8,6 +8,7 @@
 #include "menubar.hxx"
 #include "uiloader.hxx"
 #include "utils.hxx"
+#include "logging.hxx"
 
 namespace easyqt {
 	template<typename T>
@@ -17,7 +18,7 @@ namespace easyqt {
 		if (QIcon::hasThemeIcon(iconName)) {
 			item->setIcon(QIcon::fromTheme(itemNode.child_value("icon")));
 		} else {
-			std::cout << "Warning: no such theme icon '" << iconName << "' in theme " << QIcon::themeName().toStdString() << " !" << std::endl;
+			LOG(WARN, "Warning: no such theme icon '" << iconName << "' in theme " << QIcon::themeName() << " !");
 		}
 		item->setShortcut(QKeySequence(itemNode.child_value("shortcut")));
 		std::shared_ptr<Command> cmd = getCommand(itemNode.child_value("command"));
@@ -29,7 +30,7 @@ namespace easyqt {
 				&Command::execute
 			);
 		} else {
-			std::cout << "No command with name '" << itemNode.child_value("command") << "' !" << std::endl;
+			LOG(ERROR, "No command with name '" << itemNode.child_value("command") << "' !");
 		}
 	}
 
@@ -37,11 +38,12 @@ namespace easyqt {
 	void addMenu(T* parent, pugi::xml_node menuNode) {
 		QMenu* menu = parent->addMenu(menuNode.child_value("label"));
 		if (menuNode.child("file")) {
-			std::string path = getResourcePath(menuNode.child("file").value());
+			std::string path = getResourcePath(std::string("res:") + menuNode.child("file").value());
 			pugi::xml_document xml;
 			pugi::xml_parse_result result = xml.load_file(path.c_str());
 			if (!result) {
-				std::cout << "Failed loading menu file '" << path << "': " << result.description() << " !" << std::endl;
+				LOG(ERROR, "Failed loading menu file '" << path << "': " << result.description() << " !" << std::endl);
+				return;
 			}
 			menuNode = xml.child("menu");
 		}
@@ -54,10 +56,12 @@ namespace easyqt {
 	}
 	
 	void MenuBar::loadFromFile(std::string file) {
+		std::string path = getResourcePath(file);
 		pugi::xml_document xml;
-		pugi::xml_parse_result result = xml.load_file(file.c_str());
+		pugi::xml_parse_result result = xml.load_file(path.c_str());
 		if (!result) {
-			std::cout << "Failed loading UI file '" << file << "': " << result.description() << " !" << std::endl;
+			LOG(ERROR, "Failed loading menubar file '" << file << "': " << result.description() << " !");
+			return;
 		}
 		
 		pugi::xml_node menubarNode = xml.child("menubar");
