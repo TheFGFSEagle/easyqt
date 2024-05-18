@@ -2,7 +2,7 @@
 
 namespace easyqt {
 	std::string getResourcePath(std::string path) {
-		QFile resolver(("res:" + path).c_str());
+		QFile resolver(path.c_str());
 		return resolver.fileName().toStdString();
 	}
 	
