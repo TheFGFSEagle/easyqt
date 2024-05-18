@@ -15,10 +15,12 @@ namespace easyqt {
 			enum class LogLevel: short {
 				DEBUG = 0,
 				INFO = 1,
+				WARN = 2,
 				WARNING = 2,
-				ERROR = 3,
-				FATAL = 4,
-				UNKNOWN = 5,
+				ALERT = 3,
+				ERROR = 4,
+				FATAL = 5,
+				UNKNOWN = 6,
 			};
 			
 			Logger() {};
@@ -26,7 +28,7 @@ namespace easyqt {
 			template<typename T>
 			void log(LogLevel level, const T& msg) {
 				if (level >= _level) {
-					if (level >= LogLevel::WARNING) {
+					if (level >= LogLevel::ERROR) {
 						std::cerr << "[" << level << "] " << strftime(std::time(nullptr), "%T") << " " << msg << std::endl;
 					} else {
 						std::cout << "[" << level << "] " << strftime(std::time(nullptr), "%T") << " " << msg << std::endl;
@@ -57,6 +59,7 @@ namespace easyqt {
 	std::ostream& operator<<(std::ostream& s, const easyqt::Logger::LogLevel level);
 }
 
+std::ostream& operator<<(std::ostream& s, QString value);
 
 std::string string(easyqt::Logger::LogLevel level);
 

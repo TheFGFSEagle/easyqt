@@ -6,8 +6,10 @@ std::string string(easyqt::Logger::LogLevel level) {
 			return {"DEBUG"};
 		case easyqt::Logger::LogLevel::INFO:
 			return {"INFO"};
-		case easyqt::Logger::LogLevel::WARNING:
-			return {"WARNING"};
+		case easyqt::Logger::LogLevel::WARN:
+			return {"WARN"};
+		case easyqt::Logger::LogLevel::ALERT:
+			return {"ALERT"};
 		case easyqt::Logger::LogLevel::ERROR:
 			return {"ERROR"};
 		case easyqt::Logger::LogLevel::FATAL:
@@ -16,6 +18,11 @@ std::string string(easyqt::Logger::LogLevel level) {
 			return {"UNKNOWN"};
 	}
 }
+
+std::ostream& operator<<(std::ostream& s, QString value) {
+	s << value.toStdString();
+	return s;
+};
 
 namespace easyqt {
 	std::ostream& operator<<(std::ostream& s, easyqt::Logger::LogLevel level) {
@@ -29,8 +36,10 @@ namespace easyqt {
 			return Logger::LogLevel::DEBUG;
 		} else if (upper == "INFO") {
 			return Logger::LogLevel::INFO;
-		} else if (upper == "WARNING") {
-			return Logger::LogLevel::WARNING;
+		} else if (upper == "WARNING" || upper == "WARN") {
+			return Logger::LogLevel::WARN;
+		} else if (upper == "ALERT") {
+			return Logger::LogLevel::ALERT;
 		} else if (upper == "ERROR") {
 			return Logger::LogLevel::ERROR;
 		} else if (upper == "FATAL") {
