@@ -1,6 +1,7 @@
 set(MOC_HEADERS
 	application.hxx
 	command.hxx
+	flowlayout.hxx
 	menubar.hxx
 	uiloader.hxx
 )

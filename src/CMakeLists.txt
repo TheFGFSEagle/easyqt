@@ -2,6 +2,7 @@ add_library(easyqt
 	${EASYQT_MOC_HEADERS}
 	application.cxx
 	commands.cxx
+	flowlayout.cxx
 	logging.cxx
 	menubar.cxx
 	uiloader.cxx
