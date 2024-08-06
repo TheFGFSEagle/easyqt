@@ -12,10 +12,10 @@ namespace easyqt {
 	std::string strftime(std::time_t time, const char* format);
 }
 
-template<typename T>
-std::string& string(T& string);
+namespace std {
+	string tolower(const string& s);
+	string toupper(const string& s);
+}
 
-std::string toLower(std::string& s);
-std::string toUpper(std::string& s);
 #endif
 

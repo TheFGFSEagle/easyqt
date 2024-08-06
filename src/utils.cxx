@@ -20,21 +20,21 @@ namespace easyqt {
 	}
 }
 
-template<typename T>
-std::string string(T& other) {
-	return {other};
+namespace std {
+	string tolower(const string& s) {
+		string lower;
+		for(const char& c: s) {
+			lower += tolower(c);
+		}
+		return lower;
+	}
+	string toupper(const string& s) {
+		string upper;
+		for(const char& c: s) {
+			upper += std::toupper(c);
+		}
+		return upper;
+	}
 }
 
-std::string toLower(std::string& s) {
-	for(char& c : s) {
-		c = std::tolower(c);
-	}
-	return s;
-}
-std::string toUpper(std::string& s) {
-	for(char& c : s) {
-		c = std::toupper(c);
-	}
-	return s;
-}
 

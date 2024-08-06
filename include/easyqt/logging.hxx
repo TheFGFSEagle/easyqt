@@ -61,7 +61,9 @@ namespace easyqt {
 
 std::ostream& operator<<(std::ostream& s, QString value);
 
-std::string string(easyqt::Logger::LogLevel level);
+namespace std {
+	string to_string(easyqt::Logger::LogLevel level);
+}
 
 #define LOG(level, expr) \
 	{ \
