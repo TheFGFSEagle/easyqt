@@ -5,6 +5,8 @@
 
 namespace easyqt {
 	std::shared_ptr<Command> getCommand(std::string name);
+	void addCommand(std::string name, std::shared_ptr<Command> command);
+	void removeCommand(std::string name);
 
 	EASYQTCOMMAND_GEN_DEF(CommandQuit)
 }
