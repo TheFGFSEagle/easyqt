@@ -21,12 +21,12 @@ namespace easyqt {
 		return _commandMap[name];
 	}
 	
-	void addCommand(std::string name, std::shared_ptr<Command> command) {
-		if (_commandMap.contains(name)) {
-			LOG(WARNING, "Failed adding command: a command with name " << name << " was already previously added");
+	void addCommand(std::shared_ptr<Command> command) {
+		if (_commandMap.contains(command->name())) {
+			LOG(WARNING, "Failed adding command: a command with name " << command->name() << " was already previously added");
 			return;
 		}
-		_commandMap[name] = command;
+		_commandMap[command->name()] = command;
 	}
 	
 	void removeCommand(std::string name) {

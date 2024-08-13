@@ -11,7 +11,10 @@ namespace easyqt {
 		public:
 			Command() {};
 			virtual void execute() {};
-			virtual const std::string name() { return ""; };
+			virtual inline const std::string& name() { 
+				static const std::string name = "";
+				return name;
+			};
 	};
 }
 
@@ -19,16 +22,17 @@ namespace easyqt {
 class classname: public SmartPtrSingleton<classname, easyqt::Command> { \
 	public: \
 		void execute() override; \
-		const std::string name() override; \
+		inline const std::string& name() override; \
 };
 
 #define EASYQTCOMMAND_GEN_IMPL(classname, stringname, exec_code) \
 void classname::execute() { \
 	exec_code; \
 } \
-const std::string classname::name() { \
-	return stringname; \
-} \
+inline const std::string& classname::name() { \
+	static const std::string name = stringname; \
+	return name; \
+}
 
 #endif
 
