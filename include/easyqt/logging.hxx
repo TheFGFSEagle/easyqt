@@ -28,10 +28,14 @@ namespace easyqt {
 			template<typename T>
 			void log(LogLevel level, const T& msg) {
 				if (level >= _level) {
+					std::ostringstream sstream;
+					sstream << "[" << level << "] " << strftime(std::time(nullptr), "%T") << " " << msg << std::endl;
 					if (level >= LogLevel::ERROR) {
-						std::cerr << "[" << level << "] " << strftime(std::time(nullptr), "%T") << " " << msg << std::endl;
+						std::cerr << sstream.str();
+						std::cerr.flush();
 					} else {
-						std::cout << "[" << level << "] " << strftime(std::time(nullptr), "%T") << " " << msg << std::endl;
+						std::cout << sstream.str();
+						std::cout.flush();
 					}
 				}
 			}
