@@ -102,7 +102,6 @@ namespace easyqt {
 		
 		for (QLayoutItem* item: std::as_const(_itemList)) {
 			if (columns == 0) {
-				columns = 1;
 				_rows += 1;
 			}
 			const QWidget* wid = item->widget();
@@ -123,6 +122,8 @@ namespace easyqt {
 				y = y + lineHeight + spaceY;
 				nextX = x + item->sizeHint().width() + spaceX;
 				lineHeight = 0;
+			} else {
+				columns += 1;
 			}
 
 			if (!testOnly) {

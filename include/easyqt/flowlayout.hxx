@@ -26,6 +26,31 @@ namespace easyqt {
 			void setGeometry(const QRect& rect) override;
 			QSize sizeHint() const override;
 			QLayoutItem* takeAt(int index) override;
+			inline size_t row(size_t index) {
+				if (index < 0 || index >= _itemList.size()) {
+					return -1;
+				}
+				size_t row = -1;
+				for (size_t rowLength: _columns) {
+					index -= rowLength;
+					row += 1;
+					if (index < 0) {
+						break;
+					}
+				}
+				return row;
+			}
+			inline size_t row(QLayoutItem* item) {
+				return row(_itemList.indexOf(item));
+			}
+			inline size_t row(QWidget* widget) {
+				for (QLayoutItem* item: _itemList) {
+					if (item->widget() == widget) {
+						return row(item);
+					}
+				}
+				return -1;
+			}
 			inline size_t rows() { return _rows; };
 			inline size_t columns(size_t row = 0) { return _columns[row]; };
 
