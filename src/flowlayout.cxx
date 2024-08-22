@@ -4,13 +4,13 @@
 
 namespace easyqt {
 	FlowLayout::FlowLayout(QWidget* parent, int margin, int hSpacing, int vSpacing):
-			QLayout(parent), m_hSpace(hSpacing), m_vSpace(vSpacing) 
+			QLayout(parent), _hSpace(hSpacing), _vSpace(vSpacing) 
 		{
 		setContentsMargins(margin, margin, margin, margin);
 	}
 
 	FlowLayout::FlowLayout(int margin, int hSpacing, int vSpacing):
-			m_hSpace(hSpacing), m_vSpace(vSpacing)
+			_hSpace(hSpacing), _vSpace(vSpacing)
 		{
 		setContentsMargins(margin, margin, margin, margin);
 	}
@@ -23,36 +23,36 @@ namespace easyqt {
 	}
 
 	void FlowLayout::addItem(QLayoutItem* item) {
-		itemList.append(item);
+		_itemList.append(item);
 	}
 
 	int FlowLayout::horizontalSpacing() const {
-		if (m_hSpace >= 0) {
-			return m_hSpace;
+		if (_hSpace >= 0) {
+			return _hSpace;
 		} else {
 			return smartSpacing(QStyle::PM_LayoutHorizontalSpacing);
 		}
 	}
 
 	int FlowLayout::verticalSpacing() const {
-		if (m_vSpace >= 0) {
-			return m_vSpace;
+		if (_vSpace >= 0) {
+			return _vSpace;
 		} else {
 			return smartSpacing(QStyle::PM_LayoutVerticalSpacing);
 		}
 	}
 
 	int FlowLayout::count() const {
-		return itemList.size();
+		return _itemList.size();
 	}
 
 	QLayoutItem* FlowLayout::itemAt(int index) const {
-		return itemList.value(index);
+		return _itemList.value(index);
 	}
 
 	QLayoutItem* FlowLayout::takeAt(int index) {
-		if (index >= 0 && index < itemList.size())
-			return itemList.takeAt(index);
+		if (index >= 0 && index < _itemList.size())
+			return _itemList.takeAt(index);
 		return nullptr;
 	}
 
@@ -80,14 +80,14 @@ namespace easyqt {
 
 	QSize FlowLayout::minimumSize() const {
 		QSize size;
-		for (const QLayoutItem* item: std::as_const(itemList))
+		for (const QLayoutItem* item: std::as_const(_itemList))
 			size = size.expandedTo(item->minimumSize());
 
 		const QMargins margins = contentsMargins();
 		size += QSize(margins.left() + margins.right(), margins.top() + margins.bottom());
 		return size;
 	}
-
+	
 	int FlowLayout::doLayout(const QRect &rect, bool testOnly) const {
 		int left, top, right, bottom;
 		getContentsMargins(&left, &top, &right, &bottom);
@@ -96,7 +96,15 @@ namespace easyqt {
 		int y = effectiveRect.y();
 		int lineHeight = 0;
 		
-		for (QLayoutItem* item: std::as_const(itemList)) {
+		_rows = (size_t)!_itemList.empty();
+		_columns.clear();
+		int columns = 0;
+		
+		for (QLayoutItem* item: std::as_const(_itemList)) {
+			if (columns == 0) {
+				columns = 1;
+				_rows += 1;
+			}
 			const QWidget* wid = item->widget();
 			int spaceX = horizontalSpacing();
 			if (spaceX == -1) {
@@ -109,6 +117,8 @@ namespace easyqt {
 			
 			int nextX = x + item->sizeHint().width() + spaceX;
 			if (nextX - spaceX > effectiveRect.right() && lineHeight > 0) {
+				_columns.push_back(columns);
+				columns = 0;
 				x = effectiveRect.x();
 				y = y + lineHeight + spaceY;
 				nextX = x + item->sizeHint().width() + spaceX;

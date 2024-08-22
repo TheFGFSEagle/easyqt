@@ -1,6 +1,8 @@
 #ifndef EASYQT_FLOWLAYOUT_H
 #define EASYQT_FLOWLAYOUT_H
 
+#include <vector>
+
 #include <QLayout>
 #include <QRect>
 #include <QStyle>
@@ -24,14 +26,18 @@ namespace easyqt {
 			void setGeometry(const QRect& rect) override;
 			QSize sizeHint() const override;
 			QLayoutItem* takeAt(int index) override;
+			inline size_t rows() { return _rows; };
+			inline size_t columns(size_t row = 0) { return _columns[row]; };
 
 		private:
 			int doLayout(const QRect &rect, bool testOnly) const;
 			int smartSpacing(QStyle::PixelMetric pm) const;
 
-			QList<QLayoutItem*> itemList;
-			int m_hSpace;
-			int m_vSpace;
+			QList<QLayoutItem*> _itemList;
+			int _hSpace;
+			int _vSpace;
+			mutable size_t _rows;
+			mutable std::vector<size_t> _columns;
 	};
 }
 
