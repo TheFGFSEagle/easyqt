@@ -1,6 +1,9 @@
 #ifndef EASYQT_COMMAND_HXX
 #define EASYQT_COMMAND_HXX
 
+#include <memory>
+#include <vector>
+
 #include <QObject>
 
 #include <singleton.hxx>
@@ -16,6 +19,8 @@ namespace easyqt {
 				return name;
 			};
 	};
+	using CommandPtr = std::shared_ptr<Command>;
+	using CommandPtrVector = std::vector<CommandPtr>;
 }
 
 #define EASYQTCOMMAND_GEN_DEF(classname) \

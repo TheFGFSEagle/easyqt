@@ -6,6 +6,11 @@
 namespace easyqt {
 	std::shared_ptr<Command> getCommand(std::string name);
 	void addCommand(std::shared_ptr<Command> command);
+	inline void addCommands(CommandPtrVector commands) {
+		for (CommandPtr command: commands) {
+			addCommand(command);
+		}
+	}
 	void removeCommand(std::string name);
 	inline void removeCommand(std::shared_ptr<Command> command) { removeCommand(command->name()); };
 
