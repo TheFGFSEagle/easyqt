@@ -3,6 +3,7 @@ set(MOC_HEADERS
 	command.hxx
 	flowlayout.hxx
 	menubar.hxx
+	scrollarea.hxx
 	uiloader.hxx
 )
 list(TRANSFORM MOC_HEADERS PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
