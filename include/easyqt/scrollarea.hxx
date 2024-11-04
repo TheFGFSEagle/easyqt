@@ -7,7 +7,8 @@ namespace easyqt {
 	class ScrollArea: public QScrollArea {
 		Q_OBJECT
 		
-		QPoint scrollPos();
+		public:
+			QPoint scrollPos();
 	};
 }
 
